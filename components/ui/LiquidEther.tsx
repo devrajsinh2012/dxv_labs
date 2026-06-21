@@ -537,7 +537,7 @@ export default function LiquidEther({
           this.scene.add(this.plane);
         }
       }
-      update() {
+      renderShaderPass() {
         if (!Common.renderer || !this.scene || !this.camera) return;
         Common.renderer.setRenderTarget(this.props.output || null);
         Common.renderer.render(this.scene, this.camera);
@@ -586,7 +586,7 @@ export default function LiquidEther({
         this.uniforms.dt.value = dt;
         if (this.line) this.line.visible = isBounce;
         this.uniforms.isBFECC.value = BFECC;
-        super.update();
+        super.renderShaderPass();
       }
     }
 
@@ -595,9 +595,6 @@ export default function LiquidEther({
 
       constructor(simProps: any) {
         super({ output: simProps.dst });
-        this.init(simProps);
-      }
-      init(simProps: any) {
         super.init();
         const mouseG = new THREE.PlaneGeometry(1, 1);
         const mouseM = new THREE.RawShaderMaterial({
@@ -638,7 +635,7 @@ export default function LiquidEther({
           uniforms.center.value.set(centerX, centerY);
           uniforms.scale.value.set(props.cursor_size, props.cursor_size);
         }
-        super.update();
+        super.renderShaderPass();
       }
     }
 
@@ -677,7 +674,7 @@ export default function LiquidEther({
           this.uniforms.velocity_new.value = fbo_in.texture;
           this.props.output = fbo_out;
           this.uniforms.dt.value = dt;
-          super.update();
+          super.renderShaderPass();
         }
         return fbo_out;
       }
@@ -702,7 +699,7 @@ export default function LiquidEther({
       }
       update({ vel }: any) {
         this.uniforms.velocity.value = vel.texture;
-        super.update();
+        super.renderShaderPass();
       }
     }
 
@@ -737,7 +734,7 @@ export default function LiquidEther({
           }
           this.uniforms.pressure.value = p_in.texture;
           this.props.output = p_out;
-          super.update();
+          super.renderShaderPass();
         }
         return p_out;
       }
@@ -764,7 +761,7 @@ export default function LiquidEther({
       update({ vel, pressure }: any) {
         this.uniforms.velocity.value = vel.texture;
         this.uniforms.pressure.value = pressure.texture;
-        super.update();
+        super.renderShaderPass();
       }
     }
 

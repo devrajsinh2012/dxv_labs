@@ -3,14 +3,17 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
-const HeroParticles = dynamic(() => import("./HeroParticles"), { ssr: false });
+const LiquidEther = dynamic(() => import("../ui/LiquidEther"), { ssr: false });
+const DotField = dynamic(() => import("../ui/DotField"), { ssr: false });
+import BlurText from "../ui/BlurText";
 
 export default function HeroSection() {
   return (
     <section
       id="hero"
       style={{
-        background: "var(--color-ink)",
+        /* Base: near-black per reactbits.dev reference */
+        background: "#0a0a0a",
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
@@ -20,92 +23,85 @@ export default function HeroSection() {
         overflow: "hidden",
       }}
     >
-      {/* ── Layer 0: Particle canvas (full hero) ─────────────────── */}
-      <HeroParticles />
+      {/*
+       * ── BACKGROUND LAYERS (bottom → top) ─────────────────────────
+       * Layer 1 (z:1): LiquidEther — flowing organic fluid simulation
+       * Layer 2 (z:2): DotField — subtle interactive dot grid
+       * Layer 3 (z:3): Hero content
+       * Props match liquidether.md reference.
+       */}
 
-      {/* ── Layer 1: Centered top spotlight glow ─────────────────── */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          top: "-15%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "80%",
-          height: "70%",
-          background:
-            "radial-gradient(ellipse 60% 50% at center, rgba(255,87,34,0.09) 0%, rgba(255,87,34,0.03) 45%, transparent 75%)",
-          pointerEvents: "none",
-          zIndex: 2,
-          animation: "aurora-pulse 8s ease-in-out infinite",
-        }}
-      />
+      {/* ── Layer 1: LiquidEther — flowing fluid atmosphere ───── */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 1 }}>
+        <LiquidEther
+          colors={['#0a0a0a', '#8a2b05', '#ec490a']}
+          mouseForce={20}
+          cursorSize={80}
+          isViscous={false}
+          viscous={30}
+          iterationsViscous={16}
+          iterationsPoisson={16}
+          resolution={0.25}
+          BFECC={false}
+          isBounce={false}
+          autoDemo={true}
+          autoSpeed={0.75}
+          autoIntensity={2.2}
+          takeoverDuration={0.25}
+          autoResumeDelay={3000}
+          autoRampDuration={0.6}
+        />
+      </div>
 
-      {/* Secondary cooler glow (depth) */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          top: "10%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "50%",
-          height: "50%",
-          background:
-            "radial-gradient(ellipse at center, rgba(33,150,243,0.05) 0%, transparent 70%)",
-          pointerEvents: "none",
-          zIndex: 2,
-          animation: "aurora-pulse 12s ease-in-out 2s infinite reverse",
-        }}
-      />
+      {/* ── Layer 2: DotField — interactive dot grid ─────────────── */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 2, pointerEvents: "none" }}>
+        <DotField
+          dotRadius={3}
+          dotSpacing={25}
+          cursorRadius={500}
+          cursorForce={0.10}
+          bulgeOnly={true}
+          bulgeStrength={67}
+          glowRadius={2}
+          sparkle={true}
+          waveAmplitude={0}
+          gradientFrom="rgba(236, 73, 10, 0.3)"
+          gradientTo="rgba(236, 73, 10, 0.1)"
+          glowColor="#ec490a"
+        />
+      </div>
 
-      {/* ── Layer 2: Faint engineering grid ──────────────────────── */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: `
-            linear-gradient(rgba(138,148,166,0.035) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(138,148,166,0.035) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
-          pointerEvents: "none",
-          zIndex: 2,
-        }}
-      />
-
-      {/* ── Layer 3: Scan-line shimmer (top → bottom sweep) ──────── */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.007) 3px, rgba(255,255,255,0.007) 4px)",
-          pointerEvents: "none",
-          zIndex: 2,
-        }}
-      />
-
-      {/* ── Layer 4: Content ─────────────────────────────────────── */}
-      <div className="section-container" style={{ width: "100%", position: "relative", zIndex: 3 }}>
+      {/* ── Layer 3: Content (headline + CTAs) ──────────────────── */}
+      <div className="section-container" style={{ width: "100%", position: "relative", zIndex: 10 }}>
         <div className="hero-center-layout">
           {/* Headline */}
           <h1
             className="type-display"
             style={{
-              color: "var(--color-paper)",
               marginBottom: "1.5rem",
               lineHeight: 1.1,
               textAlign: "center",
-              opacity: 0,
-              transform: "translateY(24px)",
-              animation: "fade-in-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            Built once. <br />
-            <span style={{ color: "var(--color-signal)" }}>Wired to run itself.</span>
+            <BlurText
+              text="Built once."
+              delay={150}
+              baseDelay={100}
+              animateBy="words"
+              direction="bottom"
+              className="text-paper"
+            />
+            <BlurText
+              text="Wired to run itself."
+              delay={150}
+              baseDelay={450}
+              animateBy="words"
+              direction="bottom"
+              className="text-signal"
+            />
           </h1>
 
           {/* Support copy */}
@@ -119,11 +115,11 @@ export default function HeroSection() {
               textAlign: "center",
               opacity: 0,
               transform: "translateY(24px)",
-              animation: "fade-in-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards",
+              animation: "fade-in-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards",
             }}
           >
             We design the storefront, then we install the wiring behind it —
-            AI automation, WhatsApp, marketing & e-commerce — so the business
+            AI automation, WhatsApp, marketing &amp; e-commerce — so the business
             keeps running without someone pushing buttons all day.
           </p>
 
@@ -133,7 +129,7 @@ export default function HeroSection() {
             style={{
               opacity: 0,
               transform: "translateY(24px)",
-              animation: "fade-in-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards",
+              animation: "fade-in-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.0s forwards",
             }}
           >
             <Link
@@ -165,7 +161,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ── Layer 5: Bottom "scroll" hint ────────────────────────── */}
+      {/* ── Scroll hint ────────────────────────────────────────────── */}
       <div
         style={{
           position: "absolute",
@@ -180,7 +176,7 @@ export default function HeroSection() {
           color: "var(--color-steel)",
           opacity: 0.35,
           letterSpacing: "0.14em",
-          zIndex: 3,
+          zIndex: 10,
           animation: "scroll-hint 3s ease-in-out infinite",
         }}
         aria-hidden="true"
@@ -192,14 +188,9 @@ export default function HeroSection() {
         <span>×</span>
       </div>
 
-      {/* ── Keyframes injected inline ─────────────────────────────── */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes aurora-pulse {
-          0%, 100% { transform: scale(1) translate(-50%, 0); opacity: 1; }
-          33%       { transform: scale(1.06) translate(-49%, -1%); opacity: 0.85; }
-          66%       { transform: scale(0.96) translate(-51%, 1%); opacity: 0.9; }
-        }
-
+      {/* ── Keyframes ─────────────────────────────────────────────── */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes btn-shimmer {
           0%   { background-position: 200% 0; }
           100% { background-position: -200% 0; }
@@ -211,18 +202,11 @@ export default function HeroSection() {
         }
 
         @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(24px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(24px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          @keyframes aurora-pulse { 0%, 100% { transform: translate(-50%, 0); opacity: 1; } }
           @keyframes btn-shimmer  { 0%, 100% { background-position: 0 0; } }
           @keyframes scroll-hint  { 0%, 100% { opacity: 0.35; transform: translateX(-50%); } }
           @keyframes fade-in-up   { to { opacity: 1; transform: translateY(0); } }

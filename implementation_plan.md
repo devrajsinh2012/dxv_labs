@@ -251,16 +251,32 @@ d:\DxVlabs\DXV web\
 
 ---
 
+## Footer Wordmark Glitch Text (Phase 6)
+
+Replace the static outline `DxV` wordmark in the footer with a dynamic chromatic aberration RGB glitch text animation to match the Hive Studio reference.
+
+### Proposed Changes
+
+#### [NEW] [RGBGlitchText.tsx](file:///d:/DxVlabs/DXV%20web/components/ui/RGBGlitchText.tsx)
+Create a performance-focused React component featuring:
+- **RGB Subpixel Stripe Pattern**: Recreated using a `repeating-linear-gradient` clip-path or background-clip on the text elements to mimic CRT monitor cells.
+- **Three-Layer Chromatic Aberration**: Overlapping red (`#ff003c`), cyan/blue (`#00f0ff`), and white layers with `mix-blend-mode: screen`.
+- **Random Jitter Logic**: Subtle, intermittent positioning offsets controlled by React intervals (or CSS keyframes) to produce organic glitch jitters.
+- **Vertical Scanline Pattern**: Overlay overlaying the text with alternating transparent and semi-opaque horizontal strips.
+
+#### [MODIFY] [Footer.tsx](file:///d:/DxVlabs/DXV%20web/components/shared/Footer.tsx)
+- Import `RGBGlitchText` from `@/components/ui/RGBGlitchText`.
+- Replace `<p className="footer-wordmark">DxV</p>` with the new `<RGBGlitchText text="DxV" className="footer-wordmark" />` component.
+
+---
+
 ## Verification Plan
 
 ### Automated
-- `npm run build` — zero TypeScript errors, no build warnings
-- Lighthouse CI on Home (`npx lighthouse http://localhost:3000 --output json`)
-- `npx tsc --noEmit` — type check
+- `npm run build` — compiles without errors
+- `npx tsc --noEmit` — type check confirms ref types and styles are correct
 
 ### Manual
-- Visual review at 375px, 768px, 1024px, 1440px
-- Axonometric Stack hover + scroll interactions
-- Reduced-motion mode (browser DevTools emulation)
-- Dark Ink sections contrast check (text vs `#14151A` BG)
-- All CTA buttons keyboard-navigable
+- Visual alignment of footer text on dark background
+- Glitch timing check (ensure subtle, high-performance animation that does not cause lags)
+- Color channel splitting verification in chrome devtools

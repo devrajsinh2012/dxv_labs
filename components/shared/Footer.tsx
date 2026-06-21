@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import RGBGlitchText from "../ui/RGBGlitchText";
 
 const NAV_COLS = [
   {
@@ -29,7 +30,7 @@ export default function Footer() {
     <footer
       id="footer"
       style={{
-        background: "var(--color-ink)",
+        background: "#000000",
         borderTop: "1px solid rgba(138,148,166,0.1)",
         position: "relative",
         overflow: "hidden",
@@ -152,9 +153,7 @@ export default function Footer() {
         }}>
           ×
         </div>
-        <p className="footer-wordmark" style={{ textAlign: "center", paddingBottom: "0" }}>
-          DxV
-        </p>
+        <RGBGlitchText text="DxV" />
       </div>
     </footer>
   );

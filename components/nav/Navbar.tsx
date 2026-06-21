@@ -62,12 +62,12 @@ export default function Navbar() {
           <Link
             href="/"
             aria-label="DxV Labs home"
+            className="nav-logo"
             style={{
               fontFamily: "var(--font-mono)",
-              fontSize: "0.875rem",
+              fontSize: "0.825rem",
               fontWeight: 600,
               letterSpacing: "0.06em",
-              color: "var(--color-paper)",
               textDecoration: "none",
               display: "flex",
               alignItems: "center",
@@ -75,13 +75,13 @@ export default function Navbar() {
             }}
           >
             <span style={{ color: "var(--color-signal)" }}>D</span>
-            <span>×</span>
-            <span>V</span>
+            <span style={{ color: "var(--color-ink)" }}>×</span>
+            <span style={{ color: "var(--color-ink)" }}>V</span>
             <span
               style={{
                 marginLeft: "0.25rem",
-                color: "var(--color-steel)",
-                fontWeight: 400,
+                color: "#5A6476",
+                fontWeight: 500,
               }}
             >
               LABS
@@ -148,12 +148,12 @@ export default function Navbar() {
             <Link
               href="/"
               onClick={() => setMobileOpen(false)}
+              className="nav-logo"
               style={{
                 fontFamily: "var(--font-mono)",
-                fontSize: "1rem",
+                fontSize: "0.95rem",
                 fontWeight: 600,
                 letterSpacing: "0.06em",
-                color: "var(--color-paper)",
                 textDecoration: "none",
                 display: "flex",
                 alignItems: "center",
@@ -161,9 +161,9 @@ export default function Navbar() {
               }}
             >
               <span style={{ color: "var(--color-signal)" }}>D</span>
-              <span>×</span>
-              <span>V</span>
-              <span style={{ marginLeft: "0.25rem", color: "var(--color-steel)", fontWeight: 400 }}>LABS</span>
+              <span style={{ color: "var(--color-ink)" }}>×</span>
+              <span style={{ color: "var(--color-ink)" }}>V</span>
+              <span style={{ marginLeft: "0.25rem", color: "#5A6476", fontWeight: 500 }}>LABS</span>
             </Link>
 
             {/* Close button */}
@@ -256,6 +256,17 @@ export default function Navbar() {
       )}
 
       <style>{`
+        .nav-logo {
+          background-color: #FFFFFF;
+          padding: 0.35rem 0.75rem;
+          border-radius: 100px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+          transition: all 0.2s ease;
+        }
+        .nav-logo:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(255, 87, 34, 0.15);
+        }
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .mobile-menu-btn { display: flex !important; }

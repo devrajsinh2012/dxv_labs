@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 const LiquidEther = dynamic(() => import("../ui/LiquidEther"), { ssr: false });
 const DotField = dynamic(() => import("../ui/DotField"), { ssr: false });
 import BlurText from "../ui/BlurText";
+import DecryptedText from "../ui/DecryptedText";
 
 export default function HeroSection() {
   return (
@@ -94,14 +95,14 @@ export default function HeroSection() {
               direction="bottom"
               className="text-paper"
             />
-            <BlurText
+            <DecryptedText
               text="Wired to run itself."
-              delay={150}
-              baseDelay={450}
-              animateBy="words"
-              direction="bottom"
               className="text-signal"
+              duration={1200}
+              startDelay={800}
+              playOnMount={true}
             />
+
           </h1>
 
           {/* Support copy */}
@@ -118,9 +119,9 @@ export default function HeroSection() {
               animation: "fade-in-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.8s forwards",
             }}
           >
-            We design the storefront, then we install the wiring behind it —
-            AI automation, WhatsApp, marketing &amp; e-commerce — so the business
-            keeps running without someone pushing buttons all day.
+            We design the storefront, then wire in the systems behind it: AI
+            automation, WhatsApp, marketing, and e-commerce. The business keeps
+            running without anyone pushing buttons all day.
           </p>
 
           {/* CTAs */}

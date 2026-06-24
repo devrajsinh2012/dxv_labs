@@ -7,11 +7,11 @@ const NAV_COLS = [
   {
     label: "Services",
     links: [
-      { href: "/services#websites", label: "Website Building" },
-      { href: "/services#ai", label: "AI Automation" },
-      { href: "/services#whatsapp", label: "WhatsApp Automation" },
-      { href: "/services#marketing", label: "Marketing Auto." },
-      { href: "/services#ecommerce", label: "E-commerce" },
+      { href: "/services/websites",      label: "Website Building" },
+      { href: "/services/ai-automation", label: "AI Automation" },
+      { href: "/services/whatsapp",      label: "WhatsApp Automation" },
+      { href: "/services/marketing",     label: "Marketing Auto." },
+      { href: "/services/ecommerce",     label: "E-commerce" },
     ],
   },
   {

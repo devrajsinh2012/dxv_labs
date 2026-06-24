@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import DecryptedText from "@/components/ui/DecryptedText";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 const STEPS = [
   { num: "01", label: "Discover & Audit",          time: "~1–2 days", desc: "We map your current setup, competitors, and goals. You get a clear scope document before anything is built." },
@@ -53,7 +55,7 @@ export default function ProcessPage() {
             — HOW WE WORK
           </span>
           <h1 className="type-heading" style={{ color: "var(--color-paper)", marginBottom: "1rem" }}>
-            From blueprint to launch.
+            <DecryptedText text="From blueprint to launch." duration={900} />
           </h1>
           <p style={{ fontFamily: "var(--font-display)", color: "var(--color-steel)", maxWidth: "520px", lineHeight: 1.7 }}>
             Six phases. Predictable timelines. Nothing shipped until you&apos;ve approved it at every stage.
@@ -90,8 +92,8 @@ export default function ProcessPage() {
 
           <div style={{ display: "flex", flexDirection: "column", gap: "4rem" }}>
             {STEPS.map((step, i) => (
+              <ScrollReveal key={step.num} delay={i * 80} direction="left">
               <div
-                key={step.num}
                 ref={el => { stepRefs.current[i] = el; }}
                 style={{
                   position: "relative",
@@ -143,6 +145,7 @@ export default function ProcessPage() {
                   </div>
                 </div>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>

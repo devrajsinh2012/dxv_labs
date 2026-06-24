@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import TiltedCard from "@/components/ui/TiltedCard";
+import DecryptedText from "@/components/ui/DecryptedText";
 
 const CATEGORIES = ["ALL", "RESTAURANT", "E-COMMERCE", "SAAS", "PORTFOLIO", "SERVICES"];
 
@@ -48,7 +50,7 @@ export default function WorkPage() {
             — WORK & TEMPLATES
           </span>
           <h1 className="type-heading" style={{ color: "var(--color-paper)", marginBottom: "1rem" }}>
-            Every site starts here.
+            <DecryptedText text="Every site starts here." duration={900} />
           </h1>
           <p style={{ fontFamily: "var(--font-display)", fontSize: "1rem", color: "var(--color-steel)", maxWidth: "500px" }}>
             Production-ready templates — pick one as a starting point, or tell us what you need and we&apos;ll build from scratch.
@@ -95,8 +97,8 @@ export default function WorkPage() {
           }}
         >
           {filtered.map((tpl, i) => (
+            <TiltedCard key={tpl.id} style={{ transitionDelay: `${i * 60}ms` }}>
             <article
-              key={tpl.id}
               className="reveal"
               style={{
                 background: tpl.bg,
@@ -159,6 +161,7 @@ export default function WorkPage() {
               </div>
               <Link href="/contact" style={{ position: "absolute", inset: 0 }} aria-label={`Use ${tpl.label} template`} />
             </article>
+            </TiltedCard>
           ))}
         </div>
 

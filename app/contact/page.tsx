@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import ClickSpark from "@/components/ui/ClickSpark";
+import DecryptedText from "@/components/ui/DecryptedText";
 
 const BUSINESS_TYPES = ["Restaurant / Hospitality", "SaaS / Tech", "E-commerce", "Service Business", "Portfolio / Freelancer", "Other"];
 const BUDGET_RANGES = ["< ₹50,000", "₹50k – ₹1L", "₹1L – ₹3L", "₹3L – ₹5L", "₹5L+", "Let's discuss"];
@@ -67,7 +69,7 @@ export default function ContactPage() {
               — START A PROJECT
             </span>
             <h1 className="type-heading" style={{ color: "var(--color-paper)", marginBottom: "1.5rem" }}>
-              Tell us what you&apos;re building.
+              <DecryptedText text="Tell us what you're building." duration={900} />
             </h1>
             <p style={{ fontFamily: "var(--font-display)", color: "var(--color-steel)", lineHeight: 1.7, marginBottom: "3rem" }}>
               We review every submission personally. No automated sales sequences — just a real conversation about whether we&apos;re the right fit.
@@ -296,6 +298,7 @@ export default function ContactPage() {
               />
             </div>
 
+            <ClickSpark>
             <button
               type="submit"
               className="btn-signal"
@@ -307,6 +310,7 @@ export default function ContactPage() {
                 <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
               </svg>
             </button>
+            </ClickSpark>
 
             <p className="type-mono" style={{ color: "var(--color-steel)", opacity: 0.5, fontSize: "0.6rem" }}>
               No spam. No automated follow-ups. Just a real reply.

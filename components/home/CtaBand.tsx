@@ -3,7 +3,20 @@
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
-export default function CtaBand() {
+interface CtaBandProps {
+  /** Override the default heading. Default: "Ready to switch it on?" */
+  heading?: string;
+  /** Override the default subtext. */
+  subtext?: string;
+  /** Override the CTA button label. Default: "Start a Project" */
+  ctaLabel?: string;
+}
+
+export default function CtaBand({
+  heading = "Ready to switch it on?",
+  subtext = "Two project slots open this quarter. Tell us what you're building and we'll tell you if we can help.",
+  ctaLabel = "Start a Project",
+}: CtaBandProps) {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -91,7 +104,7 @@ export default function CtaBand() {
             margin: "0 auto 1.25rem",
           }}
         >
-          Ready to switch it on?
+          {heading}
         </h2>
 
         <p
@@ -103,13 +116,12 @@ export default function CtaBand() {
             textAlign: "center",
           }}
         >
-          Two project slots open this quarter. Tell us what you&apos;re building
-          and we&apos;ll tell you if we can help.
+          {subtext}
         </p>
 
         <div className="reveal reveal-delay-4">
           <Link href="/contact" className="btn-signal" id="cta-band-start-project" style={{ fontSize: "0.8rem", padding: "1rem 2.5rem" }}>
-            Start a Project
+            {ctaLabel}
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
               <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5M11.5 2.5V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>

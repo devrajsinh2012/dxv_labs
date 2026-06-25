@@ -1,0 +1,22 @@
+/* ============================================================
+   SCRAMBLED TEXT COMPONENT
+   ============================================================ */
+
+.text-block {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+.char {
+  will-change: transform, opacity;
+  display: inline-block;
+  white-space: pre; /* crucial to preserve spaces and alignment */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .char {
+    animation: none !important;
+    transition: none !important;
+  }
+}

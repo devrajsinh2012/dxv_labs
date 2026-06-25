@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import RGBGlitchText from "../ui/RGBGlitchText";
+import ASCIIText from "../ui/ASCIIText";
 
 const NAV_COLS = [
   {
@@ -61,7 +61,9 @@ export default function Footer() {
                 marginBottom: "1rem",
               }}
             >
-              <span style={{ color: "var(--color-signal)" }}>D</span>×V
+              <span style={{ color: "var(--color-signal)" }}>D</span>
+              <span style={{ color: "var(--color-paper)" }}>×</span>
+              <span style={{ color: "var(--color-paper)" }}>V</span>
               <span style={{ color: "var(--color-steel)", fontWeight: 400, marginLeft: "0.25rem" }}>LABS</span>
             </Link>
             <p
@@ -132,7 +134,8 @@ export default function Footer() {
       <div
         style={{
           position: "relative",
-          paddingBottom: "0",
+          width: "100%",
+          height: "clamp(120px, 16vw, 250px)",
           overflow: "hidden",
           lineHeight: 1,
         }}
@@ -153,7 +156,16 @@ export default function Footer() {
         }}>
           ×
         </div>
-        <RGBGlitchText text="DxV" />
+        <ASCIIText
+          text="DxV"
+          asciiFontSize={7}
+          planeBaseHeight={14}
+          textColor="#ffffff"
+          enableWaves={true}
+                    waveSpeed={8.0}      // Try lower values for slower, more relaxed waves
+          waveFrequency={2.0}  // Try higher values for tighter ripples
+          waveAmplitude={0.4}  // Try lower values for subtle 
+        />
       </div>
     </footer>
   );

@@ -24,7 +24,6 @@ export default function DecryptedText({
 }: DecryptedTextProps) {
   const [displayText, setDisplayText] = useState(text);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [triggered, setTriggered] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   const rafRef = useRef<number | null>(null);
 
@@ -73,28 +72,37 @@ export default function DecryptedText({
   useEffect(() => {
     if (playOnMount) {
       const timer = setTimeout(() => {
-        setTriggered(true);
         runDecrypt();
       }, startDelay);
       return () => clearTimeout(timer);
     }
 
     if (!ref.current) return;
-    const observer = new IntersectionObserver(
+
+    let observer: IntersectionObserver | null = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !triggered) {
-          setTriggered(true);
+        if (entry.isIntersecting) {
           setTimeout(runDecrypt, startDelay);
+          if (observer) {
+            observer.disconnect();
+            observer = null;
+          }
         }
       },
       { threshold: 0.1 }
     );
+
     observer.observe(ref.current);
+
     return () => {
-      observer.disconnect();
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (observer) {
+        observer.disconnect();
+      }
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
     };
-  }, [playOnMount, runDecrypt, startDelay, triggered]);
+  }, [playOnMount, runDecrypt, startDelay]);
 
   return (
     <span ref={ref} className={className} aria-label={text}>

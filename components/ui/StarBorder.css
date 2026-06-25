@@ -1,0 +1,151 @@
+/* ============================================================
+   STAR BORDER COMPONENT
+   ============================================================ */
+
+.star-border-container {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.border-gradient-bottom {
+  position: absolute;
+  width: 300%;
+  height: 50%;
+  opacity: 0.85;
+  bottom: -12px;
+  right: -250%;
+  border-radius: 50%;
+  animation: star-movement-bottom linear infinite alternate;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.border-gradient-top {
+  position: absolute;
+  opacity: 0.85;
+  width: 300%;
+  height: 50%;
+  top: -12px;
+  left: -250%;
+  border-radius: 50%;
+  animation: star-movement-top linear infinite alternate;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.star-border-container .inner-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   RE-ROUTING BUTTON ACCENTS (btn-signal / btn-outline)
+   ============================================================ */
+
+/* Signal Accent Button style override inside StarBorder */
+.star-border-container.btn-signal {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 1px; /* thickness default */
+  transform: none;
+  transition: transform var(--duration-fast) var(--ease-expo);
+}
+
+.star-border-container.btn-signal:hover {
+  transform: translateY(-1px);
+}
+
+.star-border-container.btn-signal .inner-content {
+  background-color: var(--color-signal);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.75rem;
+  transition: background-color var(--duration-fast) var(--ease-expo),
+              box-shadow var(--duration-fast) var(--ease-expo);
+}
+
+.star-border-container.btn-signal:hover .inner-content {
+  background-color: #e64a19;
+  box-shadow: 0 0 32px rgba(255, 87, 34, 0.45);
+}
+
+/* Outline Accent Button style override inside StarBorder */
+.star-border-container.btn-outline {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 1px; /* thickness default */
+  transition: transform var(--duration-fast) var(--ease-expo);
+}
+
+.star-border-container.btn-outline:hover {
+  transform: translateY(-1px);
+}
+
+.star-border-container.btn-outline .inner-content {
+  background-color: var(--color-ink); /* matching dark background */
+  color: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.75rem;
+  border: 1px solid rgba(138, 148, 166, 0.2);
+  transition: border-color var(--duration-fast) var(--ease-expo),
+              color var(--duration-fast) var(--ease-expo),
+              box-shadow var(--duration-fast) var(--ease-expo);
+}
+
+.star-border-container.btn-outline:hover .inner-content {
+  border-color: var(--color-paper);
+  color: var(--color-paper);
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================================
+   KEYFRAMES & ACCESSIBILITY
+   ============================================================ */
+
+@keyframes star-movement-bottom {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-100%, 0%);
+    opacity: 0.1;
+  }
+}
+
+@keyframes star-movement-top {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(100%, 0%);
+    opacity: 0.1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .border-gradient-bottom,
+  .border-gradient-top {
+    animation: none !important;
+    display: none !important;
+  }
+}

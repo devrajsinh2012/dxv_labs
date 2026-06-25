@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 const LiquidEther = dynamic(() => import("../ui/LiquidEther"), { ssr: false });
 const DotField = dynamic(() => import("../ui/DotField"), { ssr: false });
 import BlurText from "../ui/BlurText";
+import StarBorder from "@/components/ui/StarBorder";
 
 export default function HeroSection() {
   return (
@@ -133,7 +134,8 @@ export default function HeroSection() {
               animation: "fade-in-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.0s forwards",
             }}
           >
-            <Link
+            <StarBorder
+              as={Link}
               href="/contact"
               className="btn-signal"
               id="hero-start-project"
@@ -154,10 +156,10 @@ export default function HeroSection() {
                   animation: "btn-shimmer 3s linear infinite",
                 }}
               />
-            </Link>
-            <Link href="/work" className="btn-outline" id="hero-view-work">
+            </StarBorder>
+            <StarBorder as={Link} href="/work" className="btn-outline" id="hero-view-work" color="var(--color-signal)">
               View Our Work
-            </Link>
+            </StarBorder>
           </div>
         </div>
       </div>

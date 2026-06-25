@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import GooeyNav from "@/components/ui/GooeyNav";
+import StarBorder from "@/components/ui/StarBorder";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -94,9 +95,9 @@ export default function Navbar() {
           </div>
 
           {/* CTA */}
-          <Link href="/contact" className="btn-signal nav-desktop-cta" style={{ fontSize: "0.65rem", padding: "0.55rem 1.1rem" }}>
+          <StarBorder as={Link} href="/contact" className="btn-signal nav-desktop-cta" style={{ fontSize: "0.65rem", padding: "0.55rem 1.1rem" }}>
             Start a Project
-          </Link>
+          </StarBorder>
 
           {/* Mobile hamburger */}
           <button
@@ -229,7 +230,8 @@ export default function Navbar() {
 
           {/* Bottom Section: CTA */}
           <div style={{ marginTop: "auto", display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-            <Link
+            <StarBorder
+              as={Link}
               href="/contact"
               onClick={() => setMobileOpen(false)}
               className="btn-signal"
@@ -241,7 +243,7 @@ export default function Navbar() {
               }}
             >
               Start a Project
-            </Link>
+            </StarBorder>
             
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "1rem" }}>
               <span className="type-mono" style={{ fontSize: "0.6rem", color: "var(--color-steel)", opacity: 0.6 }}>

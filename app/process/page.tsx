@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import DecryptedText from "@/components/ui/DecryptedText";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import StarBorder from "@/components/ui/StarBorder";
 
 const STEPS = [
   { num: "01", label: "Discover & Audit",          time: "~1–2 days", desc: "We map your current setup, competitors, and goals. You get a clear scope document before anything is built." },
@@ -177,9 +178,9 @@ export default function ProcessPage() {
 
         {/* CTA */}
         <div style={{ marginTop: "5rem", textAlign: "center" }}>
-          <Link href="/contact" className="btn-signal" id="process-start-project" style={{ fontSize: "0.8rem", padding: "1rem 2.5rem" }}>
+          <StarBorder as={Link} href="/contact" className="btn-signal" id="process-start-project" style={{ fontSize: "0.8rem", padding: "1rem 2.5rem" }}>
             Start the Process
-          </Link>
+          </StarBorder>
         </div>
       </div>
     </div>

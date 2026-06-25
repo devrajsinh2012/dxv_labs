@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import StarBorder from "@/components/ui/StarBorder";
 
 interface CtaBandProps {
   /** Override the default heading. Default: "Ready to switch it on?" */
@@ -120,12 +121,12 @@ export default function CtaBand({
         </p>
 
         <div className="reveal reveal-delay-4">
-          <Link href="/contact" className="btn-signal" id="cta-band-start-project" style={{ fontSize: "0.8rem", padding: "1rem 2.5rem" }}>
+          <StarBorder as={Link} href="/contact" className="btn-signal" id="cta-band-start-project" style={{ fontSize: "0.8rem", padding: "1rem 2.5rem" }}>
             {ctaLabel}
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
               <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5M11.5 2.5V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
-          </Link>
+          </StarBorder>
         </div>
 
         {/* Mono status line */}

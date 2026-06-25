@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import TiltedCard from "@/components/ui/TiltedCard";
 import DecryptedText from "@/components/ui/DecryptedText";
+import StarBorder from "@/components/ui/StarBorder";
 
 const CATEGORIES = ["ALL", "RESTAURANT", "E-COMMERCE", "SAAS", "PORTFOLIO", "SERVICES"];
 
@@ -197,9 +198,9 @@ export default function WorkPage() {
           <p style={{ fontFamily: "var(--font-display)", color: "var(--color-steel)", marginBottom: "1rem" }}>
             Don&apos;t see your style? We build from scratch.
           </p>
-          <Link href="/contact" className="btn-signal" id="work-custom-build">
+          <StarBorder as={Link} href="/contact" className="btn-signal" id="work-custom-build">
             Start a Custom Project
-          </Link>
+          </StarBorder>
         </div>
       </div>
     </section>

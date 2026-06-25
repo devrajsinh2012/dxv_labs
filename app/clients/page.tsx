@@ -1,4 +1,5 @@
 import Link from "next/link";
+import StarBorder from "@/components/ui/StarBorder";
 
 const TESTIMONIALS = [
   { quote: "DxV didn't just build us a website — they wired an entire system. Our orders are tracked automatically, follow-ups go out the same day, and we haven't touched a button in months.", name: "Priya Sharma", role: "Founder", company: "Bloom Kitchen Co.", result: "RESULT: +68% ONLINE ORDERS", coord: "X:021 Y:001" },
@@ -92,9 +93,9 @@ export default function ClientsPage() {
           <p style={{ fontFamily: "var(--font-display)", color: "var(--color-steel)", marginBottom: "1.5rem" }}>
             Add your name to this list.
           </p>
-          <Link href="/contact" className="btn-signal" id="clients-start-project">
+          <StarBorder as={Link} href="/contact" className="btn-signal" id="clients-start-project">
             Start a Project
-          </Link>
+          </StarBorder>
         </div>
       </div>
     </div>

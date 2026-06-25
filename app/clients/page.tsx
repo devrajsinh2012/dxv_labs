@@ -1,5 +1,9 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import StarBorder from "@/components/ui/StarBorder";
+import DecryptedText from "@/components/ui/DecryptedText";
 
 const TESTIMONIALS = [
   { quote: "DxV didn't just build us a website — they wired an entire system. Our orders are tracked automatically, follow-ups go out the same day, and we haven't touched a button in months.", name: "Priya Sharma", role: "Founder", company: "Bloom Kitchen Co.", result: "RESULT: +68% ONLINE ORDERS", coord: "X:021 Y:001" },
@@ -17,16 +21,35 @@ const STATUS_BOARD = [
 ];
 
 export default function ClientsPage() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll(".reveal").forEach((el, i) => {
+              setTimeout(() => el.classList.add("visible"), i * 80);
+            });
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div style={{ background: "var(--color-ink)", minHeight: "100vh", paddingTop: "120px" }}>
+    <div ref={sectionRef} style={{ background: "var(--color-ink)", minHeight: "100vh", paddingTop: "120px" }}>
       <div className="section-container section-pad" style={{ paddingTop: "2rem" }}>
         {/* Header */}
-        <div style={{ marginBottom: "4rem" }}>
+        <div className="reveal" style={{ marginBottom: "4rem" }}>
           <span className="type-mono" style={{ color: "var(--color-signal)", display: "block", marginBottom: "0.75rem" }}>
             — CLIENT RESULTS
           </span>
           <h1 className="type-heading" style={{ color: "var(--color-paper)", marginBottom: "1rem" }}>
-            Brands that switched it on.
+            <DecryptedText text="Brands that switched it on." duration={900} />
           </h1>
           <p style={{ fontFamily: "var(--font-display)", color: "var(--color-steel)", maxWidth: "480px", lineHeight: 1.7 }}>
             Real results from real businesses. Numbers in, buttons saved per week.
@@ -34,7 +57,7 @@ export default function ClientsPage() {
         </div>
 
         {/* Status board */}
-        <div style={{ marginBottom: "5rem", border: "1px solid rgba(138,148,166,0.15)", padding: "2rem" }}>
+        <div className="reveal reveal-delay-2" style={{ marginBottom: "5rem", border: "1px solid rgba(138,148,166,0.15)", padding: "2rem" }}>
           <p className="type-mono" style={{ color: "var(--color-steel)", marginBottom: "1.5rem" }}>
             SYSTEMS CURRENTLY LIVE
           </p>
@@ -53,11 +76,13 @@ export default function ClientsPage() {
           {TESTIMONIALS.map((t, i) => (
             <div
               key={i}
+              className="reveal"
               style={{
                 background: "var(--color-surface-dark)",
                 border: "1px solid rgba(138,148,166,0.2)",
                 padding: "2rem",
                 position: "relative",
+                transitionDelay: `${i * 80}ms`,
               }}
             >
               <span style={{ position: "absolute", top: 8, left: 8, fontFamily: "var(--font-mono)", fontSize: "0.65rem", color: "var(--color-steel)", opacity: 0.4 }} aria-hidden="true">×</span>
@@ -89,7 +114,7 @@ export default function ClientsPage() {
         </div>
 
         {/* Add your name CTA */}
-        <div style={{ textAlign: "center", padding: "3rem", border: "1px solid rgba(138,148,166,0.15)" }}>
+        <div className="reveal" style={{ textAlign: "center", padding: "3rem", border: "1px solid rgba(138,148,166,0.15)" }}>
           <p style={{ fontFamily: "var(--font-display)", color: "var(--color-steel)", marginBottom: "1.5rem" }}>
             Add your name to this list.
           </p>

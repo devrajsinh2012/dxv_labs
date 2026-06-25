@@ -21,6 +21,8 @@ import SystemsSchematic from "@/components/hero/SystemsSchematic";
 export default function WorkPage() {
   const [active, setActive] = useState("ALL");
   const sectionRef = useRef<HTMLElement>(null);
+  const isFirstRender = useRef(true);
+  const timeoutsRef = useRef<any[]>([]);
 
   const filtered = TEMPLATES.filter(t => active === "ALL" || t.category === active);
 
@@ -40,6 +42,31 @@ export default function WorkPage() {
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    // Clear any pending timeouts from previous filter change
+    timeoutsRef.current.forEach(clearTimeout);
+    timeoutsRef.current = [];
+
+    if (sectionRef.current) {
+      const newReveals = Array.from(sectionRef.current.querySelectorAll(".reveal:not(.visible)"));
+      newReveals.forEach((el, i) => {
+        const timeout = setTimeout(() => {
+          el.classList.add("visible");
+        }, i * 50);
+        timeoutsRef.current.push(timeout);
+      });
+    }
+
+    return () => {
+      timeoutsRef.current.forEach(clearTimeout);
+    };
+  }, [active]);
 
   return (
     <section ref={sectionRef} style={{ background: "var(--color-ink)", minHeight: "100vh", paddingTop: "120px" }}>

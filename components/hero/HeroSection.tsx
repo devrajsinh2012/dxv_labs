@@ -6,7 +6,6 @@ import dynamic from "next/dynamic";
 const LiquidEther = dynamic(() => import("../ui/LiquidEther"), { ssr: false });
 const DotField = dynamic(() => import("../ui/DotField"), { ssr: false });
 import BlurText from "../ui/BlurText";
-import DecryptedText from "../ui/DecryptedText";
 
 export default function HeroSection() {
   return (
@@ -95,12 +94,13 @@ export default function HeroSection() {
               direction="bottom"
               className="text-paper"
             />
-            <DecryptedText
+            <BlurText
               text="Wired to run itself."
+              delay={150}
+              baseDelay={450}
+              animateBy="words"
+              direction="bottom"
               className="text-signal"
-              duration={1200}
-              startDelay={800}
-              playOnMount={true}
             />
 
           </h1>
